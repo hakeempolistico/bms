@@ -6,7 +6,7 @@
     -->
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Bill Management
+                    EARTHGRIDS RESEARCH
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -21,6 +21,13 @@
                         <a href="<?php echo site_url('bills') ?>">
                             <i class="material-icons">receipt</i>
                             <p>Bills</p>
+                        </a>
+                    </li>
+
+                    <li class="<?php if(isset($active) && $active == 'expenses') echo 'active'; ?>">
+                        <a href="<?php echo site_url('expenses') ?>">
+                            <i class="material-icons">attach_money</i>
+                            <p>Expenses</p>
                         </a>
                     </li>
                     <li>

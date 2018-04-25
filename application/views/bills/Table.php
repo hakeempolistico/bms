@@ -49,6 +49,16 @@
             <?=$topnav?>
             <div class="content">
                 <div class="container-fluid">
+                    <?php if(isset($_SESSION['fd'])) { ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>MESSAGE!</strong> <?php echo $_SESSION['fd'] ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
                     <div class="row">
                         <div class="col-md-12">
                             <a type="button" class="btn btn-info btn-round pull-right" data-toggle="modal" data-target="#modal-add">
@@ -64,12 +74,12 @@
                                     <p class="category">Complete bill information</p>
                                 </div>
                                 <div class="card-content">
-                                    <form>
+                                    <form action="<?php echo base_url('bills/insert'); ?>" method="post">
                                         <div class="row padding-row">
                                             <div class="col-md-12">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Invoice Number</label>
-                                                    <input type="text" class="form-control" required>
+                                                    <input type="text" class="form-control" name="invoice_number" value="<?php echo set_value('invoice_number'); ?>" required>
                                                     <span class="material-input"></span>
                                                 </div>
                                             </div>
@@ -78,18 +88,18 @@
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Company/Person</label>
-                                                    <input type="text" class="form-control" required>
+                                                    <input type="text" class="form-control" name="company" value="<?php echo set_value('company'); ?>" required>
                                                 <span class="material-input"></span></div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Service</label>
-                                                    <select class="form-control" required>
+                                                    <select class="form-control" name="service" required>
                                                         <option></option>
-                                                        <option>Water</option>
-                                                        <option>Electricity</option>
-                                                        <option>House Rent</option>
-                                                        <option>Internet</option>
+                                                        <option <?php if(set_value('service')=='Water') echo 'selected'; ?>>Water</option>
+                                                        <option <?php if(set_value('service')=='Electricity') echo 'selected'; ?>>Electricity</option>
+                                                        <option <?php if(set_value('service')=='House Rent') echo 'selected'; ?>>House Rent</option>
+                                                        <option <?php if(set_value('service')=='Internet') echo 'selected'; ?>>Internet</option>
                                                     </select>
                                                 <span class="material-input"></span></div>
                                             </div>
@@ -98,13 +108,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Month/Year</label>
-                                                    <input type="text" class="form-control pull-right month-year" required>
+                                                    <input type="text" class="form-control pull-right month-year" name="month_due" value="<?php echo set_value('month_due'); ?>" required>
                                                 <span class="material-input"></span></div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Amount</label>
-                                                    <input type="number" class="form-control" required>
+                                                    <input type="number" class="form-control" name="amount" value="<?php echo set_value('amount'); ?>" required>
                                                 <span class="material-input"></span></div>
                                             </div>
                                         </div>
@@ -112,13 +122,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Date Paid</label>
-                                                    <input type="text" class="form-control pull-right datepicker" required>
+                                                    <input type="text" class="form-control pull-right datepicker" name="date_paid" value="<?php echo set_value('date_paid'); ?>">
                                                 <span class="material-input"></span></div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Amount Paid</label>
-                                                    <input type="text" class="form-control" required>
+                                                    <input type="text" class="form-control" name="amount_paid" value="<?php echo set_value('amount_paid'); ?>">
                                                     <span class="material-input"></span>
                                                 </div>
                                             </div>
@@ -299,10 +309,36 @@
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url(); ?>assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
-  $('#table-bills').DataTable();
+  $('#table-bills').DataTable({
+        "processing" : true,
+        "ajax" : {
+            "url" : "<?php echo base_url('bills/populatetable'); ?>",
+            dataSrc : ''
+        },
+        "columns" : [ {
+            "data" : "invoice_number"
+        }, {
+            "data" : "company"
+        }, {
+            "data" : "service"
+        }, {
+            "data" : "month_due"
+        }, {
+            "data" : "amount"
+        }, {
+            "data" : "date_paid"
+        }, {
+            "data" : "paid"
+        }, {
+            "data" : "amount_paid"
+        }, {
+            "data" : 'action'
+        }]
+    });
     //Date picker
     $('.datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+      format: "yyyy-mm-dd"
     })
     $(".month-year").datepicker( {
     format: "mm-yyyy",
