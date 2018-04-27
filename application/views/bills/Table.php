@@ -66,6 +66,76 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">receipt</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">No of Bills</p>
+                                    <h3 class="title"><?php echo $count_bills; ?>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Overall number of bills
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">clear</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">No of Unpaid</p>
+                                    <h3 class="title"><?php echo $count_unpaid; ?>
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Overall number of unpaid bills
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="purple">
+                                    <i class="material-icons">attach_money</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Monthly Total</p>
+                                    <h3 class="title">-
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Total amount for the month
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">attach_money</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Yearly Total</p>
+                                    <h3 class="title">-
+                                    </h3>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">info</i> Total amount for the year
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal fade modal-margin" id="modal-add" role="dialog">
                         <div class="modal-dialog">
                             <div class="card">
@@ -150,18 +220,27 @@
                                     <p class="category">Complete date paid input</p>
                                 </div>
                                 <div class="card-content">
-                                    <form>
+                                    <form action="<?php echo base_url('bills/pay');?>" method="post">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Invoice Number</label>
-                                                    <input type="text" class="form-control" value="123123123" disabled>
+                                                    <input id="pay-invoice" type="text" name="invoice_number" class="form-control" value="123123123" readonly>
                                                     <span class="material-input" required></span>
                                                 </div>
-                                                <div class="form-group is-empty">
-                                                    <label class="control-label">Date Paid</label>
-                                                    <input type="text" class="form-control pull-right month-year" required>
-                                                    <span class="material-input" required></span>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Amount Paid</label>
+                                                        <input type="text" class="form-control" name="amount_paid" value="<?php echo set_value('amount_paid'); ?>">
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group is-empty">
+                                                        <label class="control-label">Date Paid</label>
+                                                        <input type="text" name="date_paid" class="form-control pull-right datepicker" required>
+                                                        <span class="material-input" required></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,83 +273,7 @@
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>123456789</td>
-                                                <td>Hakeem Polistico</td>
-                                                <td>House Rent</td>
-                                                <td>January 2018</td>
-                                                <td>5 000</td>
-                                                <td>January 15, 2018</td>
-                                                <td><i class="material-icons text-success">check</i></td>
-                                                <td>5 000</td>
-                                                <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-pay">Pay<div class="ripple-container"></div></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>123456788</td>
-                                                <td>Maynilad</td>
-                                                <td>Water</td>
-                                                <td>January 2018</td>
-                                                <td> 500</td>
-                                                <td>January 15, 2018</td>
-                                                <td><i class="material-icons text-success">check</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
-                                            <tr>
-                                                <td>123456777</td>
-                                                <td>Meralco</td>
-                                                <td>Electricity</td>
-                                                <td>March 2018</td>
-                                                <td>5 000</td>
-                                                <td>-</td>
-                                                <td><i class="material-icons text-primary">clear</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
-                                            <tr>
-                                                <td>123456777</td>
-                                                <td>Meralco</td>
-                                                <td>Electricity</td>
-                                                <td>March 2018</td>
-                                                <td>5 000</td>
-                                                <td>-</td>
-                                                <td><i class="material-icons text-primary">clear</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
-                                            <tr>
-                                                <td>123456777</td>
-                                                <td>Meralco</td>
-                                                <td>Electricity</td>
-                                                <td>March 2018</td>
-                                                <td>5 000</td>
-                                                <td>-</td>
-                                                <td><i class="material-icons text-primary">clear</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
-                                            <tr>
-                                                <td>123456777</td>
-                                                <td>Meralco</td>
-                                                <td>Electricity</td>
-                                                <td>March 2018</td>
-                                                <td>5 000</td>
-                                                <td>-</td>
-                                                <td><i class="material-icons text-primary">clear</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
-                                            <tr>
-                                                <td>123456777</td>
-                                                <td>Meralco</td>
-                                                <td>Electricity</td>
-                                                <td>March 2018</td>
-                                                <td>5 000</td>
-                                                <td>-</td>
-                                                <td><i class="material-icons text-primary">clear</i></td>
-                                                <td>5 000</td>
-                                                <td><button class="btn btn-primary btn-sm">Pay<div class="ripple-container"></div>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -333,18 +336,26 @@
             "data" : "amount_paid"
         }, {
             "data" : 'action'
-        }]
+        }],
+        "initComplete": function( settings, json ) {
+            $('#table-bills').on('click', '.btn-pay', function(){
+                $('#pay-invoice').val($(this).parent().siblings(":first").text())
+            })
+        }
     });
     //Date picker
     $('.datepicker').datepicker({
-      autoclose: true,
-      format: "yyyy-mm-dd"
+        autoclose: true,
+        format: "yyyy-mm-dd"
     })
     $(".month-year").datepicker( {
-    format: "mm-yyyy",
-    startView: "months", 
-    minViewMode: "months"
-});
+        format: "mm-yyyy",
+        startView: "months", 
+        minViewMode: "months"
+    })
+
+    
+    
 </script>
 
 </html>

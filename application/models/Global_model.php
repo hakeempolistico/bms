@@ -3,16 +3,29 @@ class Global_model extends CI_Model{
 
 	public function insert($table,$data)
 	{
-		$query = $this->db->insert($table, $data);
-		return $query;
+		return $this->db->insert($table, $data);
 	}
 
 	public function getRecords($table)
 	{
-		$res = $this->db->get($table)->result();
-		return $res;
+		return $this->db->get($table)->result();
 	}
 
+	public function update($table, $set, $where)
+	{
+		$this->db->set($set);
+		$this->db->where($where);
+		return $this->db->update($table);
+	}
+
+	public function count($table, $where=null)
+	{
+		if($where){
+			$this->db->where($where);
+		}
+		$query = $this->db->get($table);
+		return $query->num_rows();
+	}
 
 }
 ?>

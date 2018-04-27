@@ -21,6 +21,8 @@ class Bills extends CI_Controller {
 	public function index()
 	{
 		$data = array();
+		$data['count_bills'] = $this->global_model->count('bills');
+		$data['count_unpaid'] = $this->global_model->count('bills', array('date_paid' => '0000-00-00'));
 		$data['active'] = 'bills';
 		$data['sidebar'] = $this->load->view('template/sidebar', $data, TRUE);
 		$data['topnav'] = $this->load->view('template/topnav', $data, TRUE);
@@ -45,13 +47,28 @@ class Bills extends CI_Controller {
         }
 	}
 
+	public function pay()
+	{
+		$data = $this->input->post();	
+		$where = array('invoice_number' => $data['invoice_number'] );
+		$set = array('date_paid' => $data['date_paid'], 'amount_paid' => $data['amount_paid'] );
+		
+		if($this->global_model->update('bills', $set, $where) == 1) {
+            $this->session->set_flashdata('fd', 'SUCCESSFULLY UPDATED DATA');
+            redirect('/bills', 'refresh');
+		}else{
+            $this->session->set_flashdata('fd', 'ERROR!');
+            redirect('/bills', 'refresh');
+		}
+	}
+
 	public function populateTable()
 	{
 		$data = $this->global_model->getRecords('bills');
 		foreach ($data as $val) {
 			if($val->date_paid=="0000-00-00"){
-				$val->paid = '<i class="material-icons text-primary">clear</i>';
-				$val->action = '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-pay">Pay<div class="ripple-container"></div></button>';
+				$val->paid = '<i class="material-icons text-danger">clear</i>';
+				$val->action = '<button type="button" class="btn btn-primary btn-pay btn-sm" data-toggle="modal" data-target="#modal-pay">Pay<div class="ripple-container"></div></button>';
 			}else{
 				$val->paid = '<i class="material-icons text-success">check</i>';
 				$val->action = '-';				
