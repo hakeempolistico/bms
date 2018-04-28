@@ -108,12 +108,12 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Monthly Total</p>
-                                    <h3 class="title">-
+                                    <h3 class="title"><?php echo $monthly_amount; ?>
                                     </h3>
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">info</i> Total amount for the month
+                                        <i class="material-icons">info</i> Total amount for the month of <?php echo date('F') ?>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="card-content">
                                     <p class="category">Yearly Total</p>
-                                    <h3 class="title">-
+                                    <h3 class="title"><?php echo $yearly_amount; ?>
                                     </h3>
                                 </div>
                                 <div class="card-footer">
@@ -146,12 +146,18 @@
                                 <div class="card-content">
                                     <form action="<?php echo base_url('bills/insert'); ?>" method="post">
                                         <div class="row padding-row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Invoice Number</label>
                                                     <input type="text" class="form-control" name="invoice_number" value="<?php echo set_value('invoice_number'); ?>" required>
                                                     <span class="material-input"></span>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group is-empty">
+                                                    <label class="control-label">Amount</label>
+                                                    <input type="number" class="form-control" name="amount" value="<?php echo set_value('amount'); ?>" required>
+                                                <span class="material-input"></span></div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -177,17 +183,19 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
-                                                    <label class="control-label">Month/Year</label>
-                                                    <input type="text" class="form-control pull-right month-year" name="month_due" value="<?php echo set_value('month_due'); ?>" required>
+                                                    <label class="control-label">Bill Period Start</label>
+                                                    <input type="text" class="form-control pull-right datepicker" name="period_start" value="<?php echo set_value('period_start'); ?>" required>
                                                 <span class="material-input"></span></div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
-                                                    <label class="control-label">Amount</label>
-                                                    <input type="number" class="form-control" name="amount" value="<?php echo set_value('amount'); ?>" required>
+                                                    <label class="control-label">Bill Period End</label>
+                                                    <input type="text" class="form-control pull-right datepicker" name="period_end" value="<?php echo set_value('period_end'); ?>" required>
                                                 <span class="material-input"></span></div>
                                             </div>
                                         </div>
+                                        <hr>
+                                        <h7 class="text-success">IF BILL IS PAID, FILL UP BOTTOM FORM!</h7>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">
@@ -265,10 +273,11 @@
                                             <th>Invoice No</th>
                                             <th>Company/Person</th>
                                             <th>Service</th>
-                                            <th>Month/Year</th>
+                                            <th>Period Start</th>
+                                            <th>Period End</th>
                                             <th>Amount</th>
-                                            <th>Date Paid</th>
                                             <th>Paid</th>
+                                            <th>Date Paid</th>
                                             <th>Amount Paid</th>
                                             <th>Action</th>
                                         </thead>
@@ -325,13 +334,15 @@
         }, {
             "data" : "service"
         }, {
-            "data" : "month_due"
+            "data" : "period_start"
+        }, {
+            "data" : "period_end"
         }, {
             "data" : "amount"
         }, {
-            "data" : "date_paid"
-        }, {
             "data" : "paid"
+        }, {
+            "data" : "date_paid"
         }, {
             "data" : "amount_paid"
         }, {

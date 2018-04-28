@@ -6,8 +6,11 @@ class Global_model extends CI_Model{
 		return $this->db->insert($table, $data);
 	}
 
-	public function getRecords($table)
+	public function getRecords($table, $where = null)
 	{
+		if($where){
+			$this->db->where($where);
+		}
 		return $this->db->get($table)->result();
 	}
 
