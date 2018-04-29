@@ -5,8 +5,8 @@
         Tip 2: you can also add an image using data-image tag
     -->
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    EARTHGRIDS RESEARCH
+                <a href="#" class="simple-text">
+                    <i class="material-icons" style="margin-bottom: 3px">language</i> Earthgrids
                 </a>
             </div>
             <div class="sidebar-wrapper">

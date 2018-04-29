@@ -41,6 +41,13 @@
     .modal-margin{
         margin-top: -70px;
     }
+    #add-link{
+        margin-top: -15px;
+    }
+    #add-link:hover{
+        color: white !important;
+        cursor: pointer;
+    }
 </style>
 <body>
     <div class="wrapper">
@@ -59,13 +66,13 @@
                         </div>
                     </div>
                     <?php } ?>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12">
                             <a type="button" class="btn btn-info btn-round pull-right" data-toggle="modal" data-target="#modal-add">
                                 <i class="material-icons" >add</i> Add<div class="ripple-container"></div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card card-stats">
@@ -113,7 +120,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">info</i> Total amount for the month of <?php echo date('F') ?>
+                                        <i class="material-icons">info</i> Month of <?php echo date('F') ?>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +137,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="stats">
-                                        <i class="material-icons">info</i> Total amount for the year
+                                        <i class="material-icons">info</i> Year of <?php echo date('Y') ?>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +240,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Invoice Number</label>
-                                                    <input id="pay-invoice" type="text" name="invoice_number" class="form-control" value="123123123" readonly>
+                                                    <input id="pay-invoice" type="text" name="invoice_number" class="form-control" readonly>
                                                     <span class="material-input" required></span>
                                                 </div>
                                                 <div class="col-md-6">
@@ -265,20 +272,21 @@
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">                           
                                     <h4 class="title">Bills</h4>                                    
+                                    <p id="add-link" class="category pull-right"><i class="material-icons" data-toggle="modal" data-target="#modal-add">add_circle</i></p>
                                     <p class="category">List of bills information</p>
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table id="table-bills" class="table">
+                                    <table id="table-bills" class="table" style="font-size: 12px">
                                         <thead class="text-primary">
                                             <th>Invoice No</th>
-                                            <th>Company/Person</th>
+                                            <th>Company</th>
                                             <th>Service</th>
                                             <th>Period Start</th>
                                             <th>Period End</th>
                                             <th>Amount</th>
-                                            <th>Paid</th>
                                             <th>Date Paid</th>
                                             <th>Amount Paid</th>
+                                            <th>Paid</th>
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
@@ -340,17 +348,17 @@
         }, {
             "data" : "amount"
         }, {
-            "data" : "paid"
-        }, {
             "data" : "date_paid"
         }, {
             "data" : "amount_paid"
+        }, {
+            "data" : "paid"
         }, {
             "data" : 'action'
         }],
         "initComplete": function( settings, json ) {
             $('#table-bills').on('click', '.btn-pay', function(){
-                $('#pay-invoice').val($(this).parent().siblings(":first").text())
+                $('#pay-invoice').val($(this).closest('tr').find('td:first').text())
             })
         }
     });

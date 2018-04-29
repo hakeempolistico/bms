@@ -95,4 +95,5 @@ class Bills extends CI_Controller {
 		echo json_encode($data);
 	}
 
+
 }
