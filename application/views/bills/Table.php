@@ -201,7 +201,7 @@
                                                 <span class="material-input"></span></div>
                                             </div>
                                         </div>
-                                        <hr>
+                                        <br><br><br>
                                         <h7 class="text-success">IF BILL IS PAID, FILL UP BOTTOM FORM!</h7>
                                         <div class="row">
                                             <div class="col-md-6">
