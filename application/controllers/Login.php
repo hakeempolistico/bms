@@ -3,24 +3,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+	public function __construct()
+	{
+	    parent::__construct();
+	}
+
 	public function index()
 	{
-		$data = array();
-		$this->load->view('Login', $data);
+		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']){
+	    	redirect('dashboard', 'refresh');
+	    }else{
+			$data = array();
+			$this->load->view('Login', $data);
+	    }
+	}
+
+	public function verify_login(){
+		$this->load->model('Login_model');
+		$data = $this->input->post();
+		$res = $this->Login_model->login($data);
+		if(count($res) == 1){
+
+			//SESSION
+			$userdata = array(
+		        'username'  => $res[0]->username,
+		        'first_name'     => $res[0]->first_name,
+		        'last_name'     => $res[0]->last_name,
+		        'user_type'     => $res[0]->user_type,
+		        'email'     => $res[0]->email,
+		        'date_added'     => $res[0]->date_added,
+		        'logged_in' => TRUE
+			);
+			$this->session->set_userdata($userdata);
+
+			redirect('dashboard', 'refresh');
+
+		}else{
+			$this->session->set_flashdata('fd', 'INCORRECT USERNAME OR PASSWORD.');
+			redirect('/', 'refresh');
+		}
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('/', 'refresh');
 	}
 }

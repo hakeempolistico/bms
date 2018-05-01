@@ -6,7 +6,7 @@
     -->
             <div class="logo">
                 <a href="#" class="simple-text">
-                    <i class="material-icons" style="margin-bottom: 3px">language</i> Earthgrids
+                    Earthgrids
                 </a>
             </div>
             <div class="sidebar-wrapper">

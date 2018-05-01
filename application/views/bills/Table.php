@@ -172,7 +172,8 @@
                                                 <div class="form-group is-empty">
                                                     <label class="control-label">Company/Person</label>
                                                     <input type="text" class="form-control" name="company" value="<?php echo set_value('company'); ?>" required>
-                                                <span class="material-input"></span></div>
+                                                    <span class="material-input"></span>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group is-empty">

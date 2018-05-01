@@ -63,11 +63,12 @@
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 						<div class="card card-signup">
-							<form class="form" method="post" action="<?php echo base_url(); ?>">
+							<form class="form" method="post" action="<?php echo base_url('login/verify_login'); ?>">
 								<div class="header header-primary text-center">
 									<h4>Sign In</h4>
 								</div>
 								<div class="content">
+									<center><font style="font-size: 12px" class="text-danger"><?php if(isset($_SESSION['fd'])) { echo $_SESSION['fd']; } ?></font></center>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">face</i>
