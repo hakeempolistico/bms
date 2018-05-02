@@ -95,6 +95,42 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-lg-6 col-md-6">
+
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="red">
+                                    <div class="ct-chart" id="completedTasksChart"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Monthly Bills and Expense</h4>
+                                    <p class="category">Monitoring chart for the year 2018.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="green">
+                                    <div class="ct-chart" id="dailySalesChart"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Monthly Income</h4>
+                                    <p class="category">
+                                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">access_time</i> updated 4 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="card card-nav-tabs">
                                 <div class="card-header" data-background-color="purple">
@@ -327,7 +363,6 @@
 <!-- Material Dashboard javascript methods -->
 <script src="<?php echo base_url(); ?>assets/js/material-dashboard.js?v=1.2.0"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="<?php echo base_url(); ?>assets/js/demo.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -335,6 +370,66 @@
         demo.initDashboardPageCharts();
 
     });
+
+
+    demo = {
+        initDashboardPageCharts: function() {
+
+        /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+            dataCompletedTasksChart = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                series: [
+                    [13500, 12000, 13000, 14000, 11000, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+                ]
+            };
+
+            optionsCompletedTasksChart = {
+                lineSmooth: Chartist.Interpolation.cardinal({
+                    tension: 0
+                }),
+                low: 0,
+                high: 20000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+                chartPadding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                }
+            }
+
+            var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+
+            // start animation for the Completed Tasks Chart - Line Chart
+            md.startAnimationForLineChart(completedTasksChart);
+
+        /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+            dataCompletedTasksChart2 = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                series: [
+                    [13500, 12000, 13000, 14000, 11000, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+                ]
+            };
+
+            optionsCompletedTasksChart2 = {
+                lineSmooth: Chartist.Interpolation.cardinal({
+                    tension: 0
+                }),
+                low: 0,
+                high: 24000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+                chartPadding: {
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                }
+            }
+
+            var dailySalesChart = new Chartist.Line('#dailySalesChart', dataCompletedTasksChart2, optionsCompletedTasksChart2);
+
+            // start animation for the Completed Tasks Chart - Line Chart
+            md.startAnimationForLineChart(dailySalesChart);
+        }
+    }
 </script>
 
 </html>

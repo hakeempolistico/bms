@@ -73,11 +73,15 @@ class Bills extends CI_Controller {
 		foreach ($data as $val) {
 			if($val->date_paid=="0000-00-00"){
 				$val->paid = '<i class="material-icons text-danger">clear</i>';
-				$val->action = '<center><button type="button" class="btn btn-primary btn-pay btn-sm" data-toggle="modal" data-target="#modal-pay">Pay<div class="ripple-container"></div></button></center>';
+				$val->action = '<center>
+				<button type="button" rel="tooltip" title="" class="btn btn-simple btn-xs" data-original-title="Edit Task" data-toggle="modal" data-target="#modal-pay" style="margin: 0px;">
+                                                                <i class="material-icons" style="font-size: 20px">developer_board</i>
+                                                            <div class="ripple-container"></div></button></center>';
 				$val->date_paid = '-'; 
 				$val->amount_paid = '-'; 
 			}else{
-				$val->action = '<center><b class="text-success">PAID</b><center>';
+				$val->action = '<center>
+				<button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task" data-toggle="modal" data-target="#modal-pay" style="margin: 0px;"> <b class="text-success" style="font-size: 12px">PAID</b><div class="ripple-container"></div></button></center><center>';
 				$val->paid = '<i class="material-icons text-success">check</i>';
 				$val->date_paid = date("F j, Y", strtotime($val->date_paid)); 
 			}

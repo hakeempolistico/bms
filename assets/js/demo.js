@@ -79,9 +79,9 @@ demo = {
         /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
         dataCompletedTasksChart = {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             series: [
-                [230, 750, 450, 300, 280, 240, 200, 190]
+                [230, 750, 450, 300, 280, 240, 200, 190, 190, 190, 190, 190]
             ]
         };
 
