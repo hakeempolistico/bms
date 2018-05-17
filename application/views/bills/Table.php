@@ -362,7 +362,7 @@
                 $('#pay-invoice').val($(this).closest('tr').find('td:first').text())
             })
         }
-    });
+    })
     //Date picker
     $('.datepicker').datepicker({
         autoclose: true,

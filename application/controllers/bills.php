@@ -74,7 +74,7 @@ class Bills extends CI_Controller {
 			if($val->date_paid=="0000-00-00"){
 				$val->paid = '<i class="material-icons text-danger">clear</i>';
 				$val->action = '<center>
-				<button type="button" rel="tooltip" title="" class="btn btn-simple btn-xs" data-original-title="Edit Task" data-toggle="modal" data-target="#modal-pay" style="margin: 0px;">
+				<button type="button" rel="tooltip" title="" class="btn btn-simple btn-xs btn-pay" data-original-title="Edit Task" data-toggle="modal" data-target="#modal-pay" style="margin: 0px;">
                                                                 <i class="material-icons" style="font-size: 20px">developer_board</i>
                                                             <div class="ripple-container"></div></button></center>';
 				$val->date_paid = '-'; 
